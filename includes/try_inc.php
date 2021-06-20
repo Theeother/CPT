@@ -24,8 +24,8 @@ if (isset($_POST["submit"])){
     $result=mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($result);
 
-    
-    if ($row["outRes"] === $try){
+    $checkanswer = password_verify($try,$row["outRes"]);
+    if ($checkanswer === true){
         header("location: ../prob_temp.php?try=success&probId=$probId");
         exit();
     }

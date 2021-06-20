@@ -31,7 +31,7 @@ include_once 'nav.php';
     if (isset($_SESSION["userId"])){
       require_once 'includes/inout_gen_inc.php';
       $input=inGet($conn,$_SESSION["userId"],$probId);
-      $output=outget($conn,$_SESSION["userId"],$probId);
+      //$output=outget($conn,$_SESSION["userId"],$probId);
   }
 
 
