@@ -26,12 +26,16 @@ include_once 'nav.php';
       header("location: probs.php?error=wrongID2");
       exit();
     }
-////////////////////// input 
+////////////////////// end prob text
 
     if (isset($_SESSION["userId"])){
       require_once 'includes/inout_gen_inc.php';
+////////////////////////////////// input getting/generation
       $input=inGet($conn,$_SESSION["userId"],$probId);
-      //$output=outget($conn,$_SESSION["userId"],$probId);
+/////////////////////////// solved or not
+      $answer=get_ans($conn,$_SESSION["userId"],$probId);
+
+
   }
 
 
@@ -101,12 +105,17 @@ include_once 'nav.php';
 
 
 
-        <br><br>
-        <form action="includes/try_inc.php?probId='.$probId.'" method="POST">
+        <br><br>';
+        
+        if ($answer){
+          echo '<h1>Your answer is '.$answer['answer'].' .</h1>';
+        }
+        else{
+        echo '<form action="includes/try_inc.php?probId='.$probId.'" method="POST">
           <input type="text" style="margin-left: 1rem;" name="submission" method="POST" placeholder="Your answer">
           <button type="submit" name="submit">submit</button>
         </form>
-        ';}
+        ';}}
   else{
     echo '<p>To get an Input and get solving, <a href="login.php">login</a> or <a href="signup.php">signup</a>.</p>' ;
   }

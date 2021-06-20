@@ -26,6 +26,11 @@ if (isset($_POST["submit"])){
 
     $checkanswer = password_verify($try,$row["outRes"]);
     if ($checkanswer === true){
+        $sql="INSERT INTO solved (userId,probId,answer) VALUES (?,?,?);";
+        $stmt=mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt,$sql);
+        mysqli_stmt_bind_param($stmt, "iis",$_SESSION["userId"],$probId,$try);
+        mysqli_stmt_execute($stmt);
         header("location: ../prob_temp.php?try=success&probId=$probId");
         exit();
     }
